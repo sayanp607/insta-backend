@@ -36,8 +36,8 @@ const corsOptions = {
   credentials: true,
 };
 
+app.use(cors(corsOptions));
 
-app.use(cors(corOptions))
 
 // yha pr apni api ayengi
 app.use("/api/v1/user", userRoute);
