@@ -20,10 +20,24 @@ app.get("/",(req,res)=>{
 app.use(express.json());
 app.use(cookieParser());
 app.use(urlencoded({extended:true}));
-const corOptions ={
-  origin:'http://localhost:5173',
-  credentials:true
-}
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://insta-frontend-ehjp.vercel.app'
+];
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 app.use(cors(corOptions))
 
 // yha pr apni api ayengi
